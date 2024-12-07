@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: weather-db
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - weather-network
+
+networks:
+  weather-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
